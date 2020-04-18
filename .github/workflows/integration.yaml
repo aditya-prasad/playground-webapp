@@ -16,12 +16,13 @@ jobs:
           account_key: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
       - name: Get release version
         id: get_version
-        run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:7})
+        run: echo ${GITHUB_REF:7}
       - name: Build and publish image
-        uses: elgohr/Publish-Docker-Github-Action@master
+        uses: docker/build-push-action@v1
         with:
           name: okcredit-42/playground-webapp
           username: ${{ steps.gcloud.outputs.username }}
           password: ${{ steps.gcloud.outputs.password }}
           registry: gcr.io
-          tags: "latest,develop,${{ env.RELEASE_VERSION }}"
+          tag_with_ref: true
+          tag_with_sha: true
