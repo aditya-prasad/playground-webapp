@@ -35,7 +35,7 @@ jobs:
           COMMIT=${GITHUB_SHA:0:7}
           TAG=develop
           TAG_SHA=sha-$COMMIT
-          docker build -t $IMAGE:$TAG -t $IMAGE:TAG_SHA .
+          docker build -t $IMAGE:$TAG -t $IMAGE:$TAG_SHA .
 
           # outputs
           echo "::set-output name=tag::$TAG"
