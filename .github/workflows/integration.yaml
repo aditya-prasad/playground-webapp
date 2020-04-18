@@ -9,8 +9,10 @@ env:
   NAME: playground-webapp
 
 jobs:
-  build:
+  build-and-push-docker-image:
+    name: Build and push docker image
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -21,11 +23,10 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
-      - name: Login docker registry
-        run: |-
-          gcloud --quiet auth configure-docker
+      - name: Login to gcp container registry
+        run: gcloud --quiet auth configure-docker && docker login gcr.io
 
-      - name: Build and push image
+      - name: Build and push docker image
         uses: docker/build-push-action@v1
         with:
           registry: gcr.io
