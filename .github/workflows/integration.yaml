@@ -29,6 +29,6 @@ jobs:
           cat $GOOGLE_APPLICATION_CREDENTIALS
           gcloud auth configure-docker --quiet
           echo $GITHUB_REF
-          echo $GITHUB_SHA
+          echo ${GITHUB_SHA:0:7}
 #          docker build -t gcr.io/okcredit-42/${{ env.NAME }}:develop .
 #          docker push gcr.io/okcredit-42/${{ env.NAME }}:develop
