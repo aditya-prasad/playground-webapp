@@ -74,5 +74,7 @@ jobs:
 
       - name: Test
         run: |
+          pwd
+          ls
           cd $DEPLOY_ROOT
           kubectl get deploy,svc,vs
