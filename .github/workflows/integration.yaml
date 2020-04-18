@@ -27,3 +27,6 @@ jobs:
         run: |
           echo $GOOGLE_APPLICATION_CREDENTIALS
           cat $GOOGLE_APPLICATION_CREDENTIALS
+          gcloud auth configure-docker
+          docker build -t gcr.io/okcredit-42/${{ env.NAME }}:develop .
+          docker push gcr.io/okcredit-42/${{ env.NAME }}:develop
