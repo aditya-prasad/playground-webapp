@@ -1,4 +1,4 @@
-name: Build & Publish Image
+name: Build image from develop
 on:
   push:
     branches:
@@ -7,17 +7,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Login to gcloud registry
+      - name: Get code
+        uses: actions/checkout@master
+      - name: Login to gcloud
         id: gcloud
         uses: elgohr/gcloud-login-action@master
         with:
           account_key: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
-      - name: Publish to Registry
+      - name: Get release version
+        id: get_version
+        run: echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF:7})
+      - name: Build and publish image
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
           name: okcredit-42/playground-webapp
           username: ${{ steps.gcloud.outputs.username }}
           password: ${{ steps.gcloud.outputs.password }}
           registry: gcr.io
-          snapshot: true
+          tags: "latest,develop,develop-${{ env.RELEASE_VERSION }},${{ env.RELEASE_VERSION }}"
