@@ -75,7 +75,7 @@ jobs:
       - name: Test
         run: |
           cat .envrc
-          direnv allow
+          direnv allow .
           echo $KUBECONFIG
           echo $GITHUB_WORKSPACE
           pwd
