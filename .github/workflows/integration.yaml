@@ -28,8 +28,11 @@ jobs:
 
 #      - name: Check docker login
 #        run: docker login gcr.io
-      - name: Login to gcp container registry
-        run: echo "${GCP_SA_KEY}" | base64 -d | docker login -u _json_key --password-stdin https://gcr.io
+      - name: Setup GCP creds
+        run: echo "${GCP_SA_KEY}" | base64 -d > service-account.json
+
+      - name: Docker registry login
+        run: cat service-account.json | docker login -u _json_key --password-stdin https://gcr.io
 
       - name: Build and push docker image
         uses: docker/build-push-action@v1
