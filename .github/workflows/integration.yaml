@@ -55,7 +55,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ env.DEPLOYMENT_REPO }}
-          token: ${{ secrets.GitHub_PAT }}
+          token: ${{ secrets.X_GITHUB_PERSONAL_ACCESS_TOKEN }}
           ref: master
       - name: Test
         run: |
