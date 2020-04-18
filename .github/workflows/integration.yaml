@@ -8,6 +8,7 @@ on:
 env:
   NAME: playground-webapp
   IMAGE: gcr.io/okcredit-42/playground-webapp
+  DEPLOYMENT_REPO: okcredit/STAGING
 
 jobs:
   publish_docker_image:
@@ -50,7 +51,14 @@ jobs:
     needs:
       - publish_docker_image
     steps:
+      - name: Checkout doployment code
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ env.DEPLOYMENT_REPO }}
+          token: ${{ secrets.GitHub_PAT }}
+          ref: master
       - name: Test
         run: |
           echo ${{ needs.publish_docker_image.outputs.tag }}
           echo ${{ needs.publish_docker_image.outputs.tag_sha }}
+          ls -la
