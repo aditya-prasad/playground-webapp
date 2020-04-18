@@ -52,5 +52,5 @@ jobs:
     steps:
       - name: Test
         run: |
-          echo ${{ needs.build_push_docker.outputs.tag }}
-          echo ${{ needs.build_push_docker.outputs.tag_sha }}
+          echo ${{ needs.publish_docker_image.outputs.tag }}
+          echo ${{ needs.publish_docker_image.outputs.tag_sha }}
