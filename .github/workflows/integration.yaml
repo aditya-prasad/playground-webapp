@@ -68,5 +68,6 @@ jobs:
       - name: Test
         run: |
           curl -sfL https://direnv.net/install.sh | bash
-          direnv allow
+          echo '\neval "$(direnv hook bash)"\n' >> $HOME/.bashrc
+          source $HOME/.bashrc
           ./setup.sh
