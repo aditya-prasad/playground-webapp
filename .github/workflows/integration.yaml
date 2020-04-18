@@ -69,5 +69,6 @@ jobs:
         run: |
           curl -sfL https://direnv.net/install.sh | bash
           echo '\neval "$(direnv hook bash)"\n' >> $HOME/.bashrc
+          cat $HOME/.bashrc
           source $HOME/.bashrc
           ./setup.sh
