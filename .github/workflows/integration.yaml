@@ -24,7 +24,10 @@ jobs:
           export_default_credentials: true
 
       - name: Login to gcp container registry
-        run: gcloud --quiet auth configure-docker && docker login gcr.io
+        run: gcloud --quiet auth configure-docker
+
+      - name: Check docker login
+        run: docker login gcr.io
 
       - name: Build and push docker image
         uses: docker/build-push-action@v1
