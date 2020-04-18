@@ -24,4 +24,4 @@ jobs:
           username: ${{ steps.gcloud.outputs.username }}
           password: ${{ steps.gcloud.outputs.password }}
           registry: gcr.io
-          tags: "latest,develop,develop-${{ env.RELEASE_VERSION }},${{ env.RELEASE_VERSION }}"
+          tags: "latest,develop,${{ env.RELEASE_VERSION }}"
