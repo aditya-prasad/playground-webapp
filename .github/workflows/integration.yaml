@@ -74,6 +74,7 @@ jobs:
 
       - name: Test
         run: |
+          direnv allow
           pwd
           cd $DEPLOY_ROOT
           ls
