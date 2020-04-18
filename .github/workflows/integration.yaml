@@ -21,7 +21,7 @@ jobs:
         id: gcloud
         uses: elgohr/gcloud-login-action@master
         with:
-          account_key: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          account_key: ${{ secrets.GCP_SA_KEY }}
 
       - name: Build and publish image
         uses: docker/build-push-action@v1
