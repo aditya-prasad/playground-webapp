@@ -9,7 +9,7 @@ env:
   NAME: playground-webapp
   IMAGE: gcr.io/okcredit-42/playground-webapp
   DEPLOY_REPO: okcredit/STAGING
-  DEPLOY_ROOT: app/web/playground-webapp
+  DEPLOY_ROOT: apps/web/playground-webapp
 
 jobs:
   #  publish_docker_image:
