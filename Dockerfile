@@ -20,7 +20,7 @@ FROM nginx:1.17.10-alpine
 
 # copy built webapp
 COPY --from=builder /webapp/build/ /webapp
-RUN chown -R nginx:nginx /webapp/*
+RUN chmod -R 755 /webapp/*
 
 # copy nginnx connfig
 COPY nginx/nginx.conf /etc/nginx/
