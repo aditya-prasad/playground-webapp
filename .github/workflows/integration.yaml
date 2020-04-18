@@ -17,18 +17,13 @@ jobs:
       - name: Get code
         uses: actions/checkout@v2
 
-      - name: Login to gcloud
-        id: gcloud
-        uses: elgohr/gcloud-login-action@master
+      - name: Setup gcloud
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
-          account_key: ${{ secrets.GCP_SA_KEY }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
 
-      - name: Build and publish image
-        uses: docker/build-push-action@v1
-        with:
-          name: okcredit-42/playground-webapp
-          username: ${{ steps.gcloud.outputs.username }}
-          password: ${{ steps.gcloud.outputs.password }}
-          registry: gcr.io
-          tag_with_ref: true
-          tag_with_sha: true
+      - name: Test
+        run: |
+          echo $GOOGLE_APPLICATION_CREDENTIALS
+          cat $GOOGLE_APPLICATION_CREDENTIALS
