@@ -79,6 +79,7 @@ jobs:
           echo $KUBECONFIG
           echo $GITHUB_WORKSPACE
           pwd
+          ls
           cd $DEPLOY_ROOT
           ls
           kubectl get deploy,svc,vs
