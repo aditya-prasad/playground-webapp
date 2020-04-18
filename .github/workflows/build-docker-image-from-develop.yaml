@@ -20,3 +20,4 @@ jobs:
           username: ${{ steps.gcloud.outputs.username }}
           password: ${{ steps.gcloud.outputs.password }}
           registry: gcr.io
+          snapshot: true
