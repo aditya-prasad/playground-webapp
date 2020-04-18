@@ -65,10 +65,14 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           export_default_credentials: true
 
-      - name: Test
+      - name: Connect to cluster
         run: |
           curl -sfL https://direnv.net/install.sh | bash
-          echo '\neval "$(direnv hook bash)"\n' >> $HOME/.bashrc
-          cat $HOME/.bashrc
+          echo 'eval "$(direnv hook bash)"' >> $HOME/.bashrc
           source $HOME/.bashrc
           ./setup.sh
+
+      - name: Test
+        run: |
+          cd $DEPLOY_ROOT
+          kubectl get deploy,svc,vs
