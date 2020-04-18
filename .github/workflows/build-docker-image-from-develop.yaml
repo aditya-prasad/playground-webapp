@@ -1,0 +1,22 @@
+name: Build & Publish Image
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Login to gcloud registry
+        id: gcloud
+        uses: elgohr/gcloud-login-action@master
+        with:
+          account_key: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+      - name: Publish to Registry
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: okcredit-42/playground-webapp
+          username: ${{ steps.gcloud.outputs.username }}
+          password: ${{ steps.gcloud.outputs.password }}
+          registry: gcr.io
