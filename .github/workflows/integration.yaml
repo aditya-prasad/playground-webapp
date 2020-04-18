@@ -10,8 +10,8 @@ env:
   IMAGE: gcr.io/okcredit-42/playground-webapp
 
 jobs:
-  build_push_docker:
-    name: Build and push docker image
+  publish_docker_image:
+    name: Publish docker image
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.build_image.outputs.tag }}
@@ -44,11 +44,11 @@ jobs:
       - name: Push image
         run: docker push $IMAGE
 
-  deploy-staging:
+  deploy_on_staging:
     name: Deploy on STAGING
     runs-on: ubuntu-latest
     needs:
-      - build_push_docker
+      - publish_docker_image
     steps:
       - name: Test
         run: |
