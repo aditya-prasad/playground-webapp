@@ -75,14 +75,14 @@ jobs:
 
       - name: Bump version and push to git
         run: |
-          export NEW_VERSION=sha-1d424c2
+          NEW_VERSION=sha-1d424c2
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
           git config --global user.name "$GITHUB_ACTOR"
           sudo add-apt-repository ppa:rmescandon/yq
           sudo apt update
           sudo apt install yq -y
           cd $DEPLOY_ROOT
-          ./bump_version.sh $NEW_VERSIONs
+          ./bump_version.sh $NEW_VERSION
           git push origin master
 
       - name: Deploy on cluster
