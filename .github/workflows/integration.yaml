@@ -73,7 +73,7 @@ jobs:
           ./setup.sh
           echo "::set-env name=KUBECONFIG::$(pwd)/kubeconfig.yaml"
 
-      - name: Test
+      - name: Bump version and push to git
         run: |
           echo $KUBECONFIG
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
@@ -83,4 +83,8 @@ jobs:
           sudo apt install yq -y
           cd $DEPLOY_ROOT
           ./bump_version.sh develop
-          git log --oneline
+          git push origin master
+
+      - name: Deploy on cluster
+        run: |
+          make uninstall && make install
