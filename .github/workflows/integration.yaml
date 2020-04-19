@@ -62,7 +62,7 @@ jobs:
       - name: Bump version
         uses: mikefarah/yq@3.3.0
         with:
-          cmd: cd ${{ env.DEPLOY_ROOT }} && ./bump_version.sh develop
+          cmd: cd ${{ env.DEPLOY_ROOT }} && pwd && ls -la && ./bump_version.sh develop
 
 #      - name: Setup gcloud
 #        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
