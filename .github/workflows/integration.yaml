@@ -87,4 +87,5 @@ jobs:
 
       - name: Deploy on cluster
         run: |
+          cd $DEPLOY_ROOT
           make uninstall && make install
