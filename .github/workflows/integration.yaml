@@ -59,27 +59,34 @@ jobs:
           token: ${{ secrets.X_GITHUB_PERSONAL_ACCESS_TOKEN }}
           ref: master
 
-      - name: Setup gcloud
-        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      - name: Bump version
+        uses: mikefarah/yq@3.3.0
         with:
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          export_default_credentials: true
+          cmd: cd ${{ env.DEPLOY_ROOT }} && ./bump_version.sh develop
 
-      - name: Connect to cluster
-        run: |
-          curl -sfL https://direnv.net/install.sh | bash
-          echo 'eval "$(direnv hook bash)"' >> $HOME/.bashrc
-          source $HOME/.bashrc
-          ./setup.sh
-
-      - name: Test
-        run: |
-          cat .envrc
-          direnv allow .
-          echo $KUBECONFIG
-          echo $GITHUB_WORKSPACE
-          pwd
-          ls
-          cd $DEPLOY_ROOT
-          ls
-          kubectl get deploy,svc,vs
+#      - name: Setup gcloud
+#        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+#        with:
+#          service_account_key: ${{ secrets.GCP_SA_KEY }}
+#          export_default_credentials: true
+#
+#      - name: Connect to cluster
+#        run: |
+#          curl -sfL https://direnv.net/install.sh | bash
+#          echo 'eval "$(direnv hook bash)"' >> $HOME/.bashrc
+#          source $HOME/.bashrc
+#          ./setup.sh
+#          echo "::set-env name=KUBECONFIG::$(pwd)/kubeconfig.yaml"
+#
+#      - name: Test
+#        run: |
+#          cat .envrc
+#          direnv allow .
+#          echo $KUBECONFIG
+#          echo $GITHUB_WORKSPACE
+#          pwd
+#          ls
+#          cd $DEPLOY_ROOT
+#          ls
+#          kubectl get deploy,svc,vs
+#          yq r -d'*' src/manifests/*.yaml "spec.template.spec.containers.(name==playground-webapp).image"
