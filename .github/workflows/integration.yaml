@@ -76,6 +76,8 @@ jobs:
       - name: Test
         run: |
           echo $KUBECONFIG
+          git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          git config --global user.name "$GITHUB_ACTOR"
           sudo add-apt-repository ppa:rmescandon/yq
           sudo apt update
           sudo apt install yq -y
