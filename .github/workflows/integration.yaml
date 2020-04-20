@@ -94,11 +94,11 @@ jobs:
 
       - name: Notify on slack
         uses: rtCamp/action-slack-notify@v2.0.0
-        env:
-          SLACK_CHANNEL: "web-devs"
-          SLACK_COLOR: "#1C873B"
-          SLACK_ICON: "https://image-okc.s3.ap-south-1.amazonaws.com/r2d2.png"
-          SLACK_MESSAGE: ${{ env.COMMIT_MSG }}
-          SLACK_TITLE: ${{ env.NAME }} successfully deployed to staging
-          SLACK_USERNAME: "r2d2"
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          env:
+            SLACK_CHANNEL: "web-devs"
+            SLACK_COLOR: "#1C873B"
+            SLACK_ICON: "https://image-okc.s3.ap-south-1.amazonaws.com/r2d2.png"
+            SLACK_MESSAGE: ${{ env.COMMIT_MSG }}
+            SLACK_TITLE: ${{ env.NAME }} successfully deployed to staging
+            SLACK_USERNAME: "r2d2"
+            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
